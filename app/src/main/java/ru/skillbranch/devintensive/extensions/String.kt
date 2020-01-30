@@ -7,3 +7,4 @@ fun String.truncate(count:Int = 16):String?{
     }
     return result
 }
+
