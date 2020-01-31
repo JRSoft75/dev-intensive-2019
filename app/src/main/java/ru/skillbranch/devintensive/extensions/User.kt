@@ -21,14 +21,14 @@ fun User.toUserView() : UserView{
     )
 }
 
-private fun Utils.toInitials(firstName: String?, lastName: String?): String? {
-    //todo
-    return ""
-}
-
-private fun Utils.transliteration(payload: String, divider: String = " "): String {
-//todo
-    return ""
-}
+//private fun Utils.toInitials(firstName: String?, lastName: String?): String? {
+//    //todo
+//    return ""
+//}
+//
+//private fun Utils.transliteration(payload: String, divider: String = " "): String {
+////todo
+//    return ""
+//}
 
 

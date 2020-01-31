@@ -18,7 +18,7 @@ object Utils {
         return if(initials.length != 0) initials else null
     }
 
-    fun transliterate(payload:String?, divider:String? = " "): String? {
+    fun transliteration(payload:String, divider:String? = " "): String {
         val abcCyr = charArrayOf(
             'а',
             'б',
