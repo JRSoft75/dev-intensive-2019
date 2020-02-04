@@ -1,5 +1,8 @@
 package ru.skillbranch.devintensive.utils
 
+
+
+
 object Utils {
     fun parseFullName(fullName:String?):Pair<String?, String?>{
         //val fullName_ = fullName?.trim()
@@ -179,4 +182,6 @@ object Utils {
         }
         return builder.toString()
     }
+
+
 }
