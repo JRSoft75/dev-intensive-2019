@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.Unregistrar
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var messageEt: EditText
     lateinit var sendBtn: ImageView
     lateinit var benderObj: Bender
+
+    private lateinit var unregistrar: Unregistrar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +80,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     fun hideKeyboard(view: View) {
+        Log.d("M_Keyboard", "Keyboard is open = ${KeyboardVisibilityEvent.isKeyboardVisible(this)}")
+
         this.hideKeyboard()
     }
+
+
+
+
 }

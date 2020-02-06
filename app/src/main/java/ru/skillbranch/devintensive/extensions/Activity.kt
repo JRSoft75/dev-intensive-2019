@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.extensions
 import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
 fun Activity.hideKeyboard(){
     val view = this.currentFocus
@@ -12,10 +13,12 @@ fun Activity.hideKeyboard(){
     }
 }
 
+
 fun Activity.isKeyboardOpen(): Boolean {
-    return true
+    return KeyboardVisibilityEvent.isKeyboardVisible(this) == true
+
 }
 
 fun Activity.isKeyboardClosed(): Boolean {
-    return true
+    return !KeyboardVisibilityEvent.isKeyboardVisible(this) == true
 }
