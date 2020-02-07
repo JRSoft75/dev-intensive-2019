@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.extensions.hideKeyboard
-import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 import ru.skillbranch.devintensive.models.Bender
 
 
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         Log.d("M_MainActivity","onCreate")
 
-//        benderImage = findViewById(R.id.iv_bender)
         benderImage = iv_bender
         textTxt = tv_text
         messageEt = et_message
@@ -77,10 +75,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
 
-    fun hideKeyboard(view: View) {
-        Log.d("M_Keyboard", "Keyboard is open = ${this.isKeyboardOpen()}")
-        this.hideKeyboard()
-    }
 
 
 
