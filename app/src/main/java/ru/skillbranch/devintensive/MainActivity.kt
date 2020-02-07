@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val (r, g, b) = color
             benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
             textTxt.text = phrase
+            this.hideKeyboard()
+            if(benderObj.question == Bender.Question.IDLE){
+                send_container.visibility = View.GONE
+            }
         }
     }
 

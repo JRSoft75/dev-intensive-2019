@@ -14,10 +14,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
         val matchResult = Regex(question.condition).find(answer)
-        var check = ""
-//        if (matchResult == null) {
-//            check = question.condition_text + "\n"
-//        }
+
         return if(matchResult == null){
             question.condition_text + "\n" +
                     question.question to status.color
