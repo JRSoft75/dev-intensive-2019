@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_profile.*
+import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
@@ -30,6 +31,8 @@ lateinit var viewFields : Map<String, TextView>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        App.setContext(this)
         initViews(savedInstanceState)
         initViewModel()
         Log.d("M_ProfileActivity","onCreate")
@@ -39,8 +42,8 @@ lateinit var viewFields : Map<String, TextView>
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState?.let { super.onSaveInstanceState(it) }
-        outState?.putBoolean(IS_EDIT_MODE,isEditMode)
+        outState.let { super.onSaveInstanceState(it) }
+        outState.putBoolean(IS_EDIT_MODE,isEditMode)
     }
 
 

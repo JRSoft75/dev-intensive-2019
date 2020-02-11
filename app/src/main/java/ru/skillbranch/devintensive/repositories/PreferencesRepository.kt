@@ -1,8 +1,8 @@
 package ru.skillbranch.devintensive.repositories
 
 import android.content.SharedPreferences
-import androidx.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.PreferenceManager
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.models.Profile
 
@@ -17,7 +17,7 @@ object PreferencesRepository {
     private const val APP_THEME = "APP_THEME"
 
     private val prefs: SharedPreferences by lazy {
-        val ctx = App.applicationContext()
+        val ctx = App.getContext()
         PreferenceManager.getDefaultSharedPreferences(ctx)
     }
 
