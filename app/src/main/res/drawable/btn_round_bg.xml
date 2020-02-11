@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-<item>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/color_accent_secondary">
+    <item android:id="@+id/mask">
+        <shape android:shape="oval">
+            <solid android:color="@color/color_accent_secondary"/>
+        </shape>
+    </item>
+<item android:id="@+id/background">
     <shape android:shape="oval">
         <solid android:color="?attr/colorBackgroundFloating"/>
     </shape>
 </item>
-</selector>
+</ripple>
