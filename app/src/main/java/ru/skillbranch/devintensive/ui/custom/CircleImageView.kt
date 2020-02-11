@@ -18,6 +18,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import ru.skillbranch.devintensive.R
+import kotlin.math.min
 
 
 //fun CircleImageView(context: Context?) {
@@ -37,16 +38,15 @@ class CircleImageView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr:Int = 0
 ) : ImageView(context, attrs, defStyleAttr) {
-
-    private val SCALE_TYPE = ScaleType.CENTER_CROP
-
-    private val BITMAP_CONFIG = Bitmap.Config.ARGB_8888
-    private val COLORDRAWABLE_DIMENSION = 2
-
-    private val DEFAULT_BORDER_WIDTH = 2
-    private val DEFAULT_BORDER_COLOR = Color.WHITE
-    private val DEFAULT_CIRCLE_BACKGROUND_COLOR = Color.TRANSPARENT
-    private val DEFAULT_BORDER_OVERLAY = false
+    companion object{
+        private val SCALE_TYPE = ScaleType.CENTER_CROP
+        private val BITMAP_CONFIG = Bitmap.Config.ARGB_8888
+        private val COLORDRAWABLE_DIMENSION = 2
+        private val DEFAULT_BORDER_WIDTH = 2
+        private val DEFAULT_BORDER_COLOR = Color.WHITE
+        private val DEFAULT_CIRCLE_BACKGROUND_COLOR = Color.TRANSPARENT
+        private val DEFAULT_BORDER_OVERLAY = false
+    }
 
     private var mDrawableRect = RectF()
     private var mBorderRect = RectF()
@@ -80,7 +80,7 @@ class CircleImageView @JvmOverloads constructor(
         if(attrs!=null){
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
             this.borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-            this.borderColor = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
+            this.borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
 
             super.setScaleType(SCALE_TYPE)
             mReady = true
@@ -352,7 +352,7 @@ class CircleImageView @JvmOverloads constructor(
     private fun calculateBounds(): RectF? {
         val availableWidth = width - paddingLeft - paddingRight
         val availableHeight = height - paddingTop - paddingBottom
-        val sideLength = Math.min(availableWidth, availableHeight)
+        val sideLength = min(availableWidth, availableHeight)
         val left = paddingLeft + (availableWidth - sideLength) / 2f
         val top = paddingTop + (availableHeight - sideLength) / 2f
         return RectF(left, top, left + sideLength, top + sideLength)

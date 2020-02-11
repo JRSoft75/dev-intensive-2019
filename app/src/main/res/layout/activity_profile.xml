@@ -47,8 +47,6 @@
                 android:layout_height="@dimen/avatar_round_size"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/man_in_black"
-                app:cv_borderWidth="52dp"
-                app:cv_borderColor="@color/color_primary_dark"
                 />
 
             <ImageButton
