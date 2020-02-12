@@ -200,18 +200,21 @@ object Utils {
             "join"
         )
         var isValid = true
-        val regex  = "^(https:\\/\\/|https:\\/\\/www\\.|www\\.)?github\\.com\\/(\\w+[^\\/])$"
-        val pattern: Pattern = Pattern.compile(regex)
-        val matcher: Matcher = pattern.matcher(repo)
+        if(!repo.isEmpty()){
+            val regex  = "^(https:\\/\\/|https:\\/\\/www\\.|www\\.)?github\\.com\\/(\\w+[^\\/])$"
+            val pattern: Pattern = Pattern.compile(regex)
+            val matcher: Matcher = pattern.matcher(repo)
 
-        if (matcher.find()) {
-            println(matcher.group(2))
-            if(blackList.contains(matcher.group(2))){
+            if (matcher.find()) {
+                println(matcher.group(2))
+                if(blackList.contains(matcher.group(2))){
+                    isValid = false
+                }
+            }else{
                 isValid = false
             }
-        }else{
-            isValid = false
         }
+
 
 
         return isValid

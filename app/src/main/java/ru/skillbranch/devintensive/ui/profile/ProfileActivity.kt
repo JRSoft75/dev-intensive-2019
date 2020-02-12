@@ -5,6 +5,8 @@ import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -76,19 +78,38 @@ class ProfileActivity : AppCompatActivity() {
             viewModel.switchTheme()
         }
 
-        et_repository.setOnClickListener {
-            val repo = et_repository.text.toString().trim()
-            Log.d("M_ProfileActivity",repo)
-            if (!Utils.validateGithubRepo(repo)) {
-                Log.d("M_ProfileActivity","Невалидный адрес репозитория")
+
+        et_repository.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(
+                s: CharSequence,
+                start: Int,
+                before: Int,
+                count: Int
+            ) { if(!isEditMode){
+                return
+            }
+                val repo = s.toString().trim()
+                if (!Utils.validateGithubRepo(repo)) {
                     wr_repository.isErrorEnabled = true
                     wr_repository.error = "Невалидный адрес репозитория"
                 }else{
                     wr_repository.isErrorEnabled = false
-                Log.d("M_ProfileActivity","адрес репозитория OK")
                 }
-
             }
+
+            override fun afterTextChanged(editable: Editable) { // действия после того, как что то введено
+                // editable - то, что введено. В строку - editable.toString()
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence,
+                start: Int,
+                count: Int,
+                after: Int
+            ) { // действия перед тем, как что то введено
+            }
+        })
+
         }
 
 
@@ -155,6 +176,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfileInfo(){
+        if(wr_repository.isErrorEnabled){
+            et_repository.text!!.clear()
+            wr_repository.isErrorEnabled = false
+            wr_repository.error = null
+        }
         Profile(
             firstName = et_first_name.text.toString(),
             lastName = et_last_name.text.toString(),
