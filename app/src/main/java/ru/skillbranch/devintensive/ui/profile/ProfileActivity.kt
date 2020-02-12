@@ -17,6 +17,7 @@ import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.ui.custom.TextDrawable
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 
@@ -32,13 +33,13 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var viewFields : Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
         App.setContext(this)
         initViews(savedInstanceState)
         initViewModel()
-        Log.d("M_ProfileActivity","onCreate")
 //        val status = savedInstanceState?.getString("STATUS") ?:Bender.Status.NORMAL.name
 //        val question = savedInstanceState?.getString("QUESTION") ?:Bender.Question.NAME.name
 
@@ -63,6 +64,7 @@ class ProfileActivity : AppCompatActivity() {
         )
 
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE,false) ?: false
+        showCurrentMode(isEditMode)
 
         btn_edit.setOnClickListener {
             if(isEditMode) saveProfileInfo()
@@ -71,12 +73,8 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         btn_switch_theme.setOnClickListener{
-         //   viewModel.switchTheme()
-            drawable = TextDrawable("RE",Color.WHITE, resources.getColor(R.color.color_accent, theme))
-            iv_avatar.setImageDrawable (drawable)
+            viewModel.switchTheme()
         }
-
-
 
     }
 
@@ -118,6 +116,8 @@ class ProfileActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+
+
     }
 
     private fun updateTheme(mode: Int) {
@@ -131,6 +131,12 @@ class ProfileActivity : AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
+        profile.nickName = Utils.transliteration(profile.firstName + "_" + profile.lastName,"_")
+        val initials = Utils.toInitials(firstName = profile.firstName, lastName = profile.lastName)
+        if(initials !=null){
+            drawable = TextDrawable(initials,Color.WHITE, resources.getColor(R.color.color_accent, theme))
+            iv_avatar.setImageDrawable (drawable)
+        }
     }
 
     private fun saveProfileInfo(){
@@ -138,7 +144,8 @@ class ProfileActivity : AppCompatActivity() {
             firstName = et_first_name.text.toString(),
             lastName = et_last_name.text.toString(),
             about = et_about.text.toString(),
-            repository = et_repository.text.toString()
+            repository = et_repository.text.toString(),
+            nickName = tv_nick_name.text.toString()
         ).apply {
             viewModel.saveProfileData(this)
         }

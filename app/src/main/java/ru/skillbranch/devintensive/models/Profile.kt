@@ -6,9 +6,10 @@ data class Profile (
     val about: String,
     val repository: String,
     val rating: Int = 0,
-    val respect: Int = 0
+    val respect: Int = 0,
+    var nickName: String
 ){
-    val nickName: String = "John Doe" //TODO implement me
+
     val rank: String = "Junior Android Developer"
 
     fun toMap():Map<String, Any> = mapOf(

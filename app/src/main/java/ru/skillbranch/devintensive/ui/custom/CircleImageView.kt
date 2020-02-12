@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewOutlineProvider
@@ -121,7 +120,6 @@ class CircleImageView @JvmOverloads constructor(
             return
         }
         if (mBitmap == null) {
-            Log.d("M_CircleImageView","onDraw mBitmap == null")
             return
         }
         if (mCircleBackgroundColor !== Color.TRANSPARENT) {
@@ -172,6 +170,15 @@ class CircleImageView @JvmOverloads constructor(
             return
         }
         this.borderColor = borderColor
+        mBorderPaint.color = this.borderColor
+        invalidate()
+    }
+
+    fun setBorderColor( hex: String) {
+        if (Color.parseColor(hex) == this.borderColor) {
+            return
+        }
+        this.borderColor = Color.parseColor(hex)
         mBorderPaint.color = this.borderColor
         invalidate()
     }
@@ -271,7 +278,6 @@ class CircleImageView @JvmOverloads constructor(
 
     private fun getBitmapFromDrawable(drawable: Drawable?): Bitmap? {
         if (drawable == null) {
-            Log.d("M_CircleImageView","getBitmapFromDrawable mBitmap == null")
             return null
         }
         return if (drawable is BitmapDrawable) {
@@ -321,7 +327,6 @@ class CircleImageView @JvmOverloads constructor(
             return
         }
         if (mBitmap == null) {
-            Log.d("M_CircleImageView","setup mBitmap == null")
             invalidate()
             return
         }

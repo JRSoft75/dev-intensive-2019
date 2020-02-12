@@ -10,6 +10,7 @@ object PreferencesRepository {
 
     private const val FIRST_NAME = "FIRST_NAME"
     private const val LAST_NAME = "LAST_NAME"
+    private const val NICK_NAME = "NICK_NAME"
     private const val ABOUT = "ABOUT"
     private const val REPOSITORY = "REPOSITORY"
     private const val RATING = "RATING"
@@ -44,7 +45,8 @@ object PreferencesRepository {
         prefs.getString(ABOUT,"")!!,
         prefs.getString(REPOSITORY,"")!!,
         prefs.getInt(RATING,0),
-        prefs.getInt(RESPECT,0)
+        prefs.getInt(RESPECT,0),
+        prefs.getString(NICK_NAME,"")!!
     )
 
     private fun putValue(pair: Pair<String, Any>) = with(prefs.edit()){
