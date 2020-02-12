@@ -76,7 +76,22 @@ class ProfileActivity : AppCompatActivity() {
             viewModel.switchTheme()
         }
 
-    }
+        et_repository.setOnClickListener {
+            val repo = et_repository.text.toString().trim()
+            Log.d("M_ProfileActivity",repo)
+            if (!Utils.validateGithubRepo(repo)) {
+                Log.d("M_ProfileActivity","Невалидный адрес репозитория")
+                    wr_repository.isErrorEnabled = true
+                    wr_repository.error = "Невалидный адрес репозитория"
+                }else{
+                    wr_repository.isErrorEnabled = false
+                Log.d("M_ProfileActivity","адрес репозитория OK")
+                }
+
+            }
+        }
+
+
 
     private fun showCurrentMode(isEdit: Boolean) {
         val info = viewFields.filter { setOf("firstName","lastName","about","repository").contains(it.key) }
@@ -150,6 +165,8 @@ class ProfileActivity : AppCompatActivity() {
             viewModel.saveProfileData(this)
         }
     }
+
+
 
 
 }

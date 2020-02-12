@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
-
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 object Utils {
@@ -181,6 +182,39 @@ object Utils {
             }
         }
         return builder.toString()
+    }
+
+    fun validateGithubRepo(repo : String):Boolean{
+        val blackList: List<String> = listOf(
+            "enterprise",
+            "features",
+            "topics",
+            "trending",
+            "events",
+            "marketplace",
+            "pricing",
+            "nonprofit",
+            "customer-stories",
+            "security",
+            "login",
+            "join"
+        )
+        var isValid = true
+        val regex  = "^(https:\\/\\/|https:\\/\\/www\\.|www\\.)?github\\.com\\/(\\w+[^\\/])$"
+        val pattern: Pattern = Pattern.compile(regex)
+        val matcher: Matcher = pattern.matcher(repo)
+
+        if (matcher.find()) {
+            println(matcher.group(2))
+            if(blackList.contains(matcher.group(2))){
+                isValid = false
+            }
+        }else{
+            isValid = false
+        }
+
+
+        return isValid
     }
 
 
