@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewOutlineProvider
@@ -120,6 +121,7 @@ class CircleImageView @JvmOverloads constructor(
             return
         }
         if (mBitmap == null) {
+            Log.d("M_CircleImageView","onDraw mBitmap == null")
             return
         }
         if (mCircleBackgroundColor !== Color.TRANSPARENT) {
@@ -269,10 +271,13 @@ class CircleImageView @JvmOverloads constructor(
 
     private fun getBitmapFromDrawable(drawable: Drawable?): Bitmap? {
         if (drawable == null) {
+            Log.d("M_CircleImageView","getBitmapFromDrawable mBitmap == null")
             return null
         }
         return if (drawable is BitmapDrawable) {
             drawable.bitmap
+        }else if (drawable is TextDrawable) {
+            drawableToBitmap(drawable)
         } else try {
             val bitmap: Bitmap
             bitmap = if (drawable is ColorDrawable) {
@@ -316,6 +321,7 @@ class CircleImageView @JvmOverloads constructor(
             return
         }
         if (mBitmap == null) {
+            Log.d("M_CircleImageView","setup mBitmap == null")
             invalidate()
             return
         }
@@ -395,6 +401,21 @@ class CircleImageView @JvmOverloads constructor(
             mBorderRadius.toDouble(),
             2.0
         )
+    }
+
+    fun drawableToBitmap(drawable: Drawable): Bitmap? {
+        if (drawable is BitmapDrawable) {
+            return drawable.bitmap
+        }
+        var width = drawable.intrinsicWidth
+        width = if (width > 0) width else 96 // Replaced the 1 by a 96
+        var height = drawable.intrinsicHeight
+        height = if (height > 0) height else 96 // Replaced the 1 by a 96
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
     }
 
 

@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.profile
 
+import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.ui.custom.TextDrawable
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 
@@ -25,8 +27,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: ProfileViewModel
+    private lateinit var drawable: TextDrawable
     var isEditMode = false
-lateinit var viewFields : Map<String, TextView>
+    lateinit var viewFields : Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +71,11 @@ lateinit var viewFields : Map<String, TextView>
         }
 
         btn_switch_theme.setOnClickListener{
-            viewModel.switchTheme()
+         //   viewModel.switchTheme()
+            drawable = TextDrawable("RE",Color.WHITE, resources.getColor(R.color.color_accent, theme))
+            iv_avatar.setImageDrawable (drawable)
         }
+
 
 
     }
