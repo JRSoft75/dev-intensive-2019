@@ -168,7 +168,7 @@ class ProfileActivity : AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
-        profile.nickName = Utils.transliteration(profile.firstName + "_" + profile.lastName,"_")
+//        profile.nickName = Utils.transliteration(profile.firstName + " " + profile.lastName,"_")
         val initials = Utils.toInitials(firstName = profile.firstName, lastName = profile.lastName)
         if(initials !=null){
             drawable = TextDrawable(initials,Color.WHITE, resources.getColor(R.color.color_accent, theme))
@@ -183,11 +183,12 @@ class ProfileActivity : AppCompatActivity() {
             wr_repository.error = null
         }
         Profile(
-            firstName = et_first_name.text.toString(),
-            lastName = et_last_name.text.toString(),
+            firstName = et_first_name.text.toString().trim(),
+            lastName = et_last_name.text.toString().trim(),
             about = et_about.text.toString(),
             repository = et_repository.text.toString(),
-            nickName = tv_nick_name.text.toString()
+//            nickName = tv_nick_name.text.toString()
+            nickName = Utils.transliteration(et_first_name.text.toString().trim() + " " + et_last_name.text.toString().trim(),"_")
         ).apply {
             viewModel.saveProfileData(this)
         }

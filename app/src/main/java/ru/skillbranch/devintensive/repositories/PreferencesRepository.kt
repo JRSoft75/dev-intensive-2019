@@ -32,6 +32,7 @@ object PreferencesRepository {
         with(profile){
             putValue(FIRST_NAME to firstName)
             putValue(LAST_NAME to lastName)
+            putValue(NICK_NAME to nickName)
             putValue(ABOUT to about)
             putValue(REPOSITORY to repository)
             putValue(RATING to rating)

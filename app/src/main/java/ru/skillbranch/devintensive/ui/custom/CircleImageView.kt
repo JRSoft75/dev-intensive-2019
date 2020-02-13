@@ -13,10 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
+import androidx.annotation.*
 import ru.skillbranch.devintensive.R
 import kotlin.math.min
 
@@ -165,7 +162,7 @@ class CircleImageView @JvmOverloads constructor(
         return this.borderColor
     }
 
-    fun setBorderColor(@ColorInt borderColor: Int) {
+    fun setBorderColor(@ColorRes borderColor: Int) {
         if (borderColor == this.borderColor) {
             return
         }
@@ -204,11 +201,11 @@ class CircleImageView @JvmOverloads constructor(
         return borderWidth
     }
 
-    fun setBorderWidth(borderWidth: Int) {
-        if (borderWidth == this.borderWidth) {
+    fun setBorderWidth(@Dimension dp: Int) {
+        if (dp == this.borderWidth) {
             return
         }
-        this.borderWidth = borderWidth
+        this.borderWidth = dp
         setup()
     }
 
