@@ -162,11 +162,11 @@ class CircleImageView @JvmOverloads constructor(
         return this.borderColor
     }
 
-    fun setBorderColor(@ColorRes borderColor: Int) {
-        if (borderColor == this.borderColor) {
+    fun setBorderColor(@ColorRes colorId: Int) {
+        if (colorId == this.borderColor) {
             return
         }
-        this.borderColor = borderColor
+        this.borderColor = colorId
         mBorderPaint.color = this.borderColor
         invalidate()
     }
