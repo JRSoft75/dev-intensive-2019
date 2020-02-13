@@ -201,7 +201,8 @@ object Utils {
         )
         var isValid = true
         if(!repo.isEmpty()){
-            val regex  = "^(https:\\/\\/|https:\\/\\/www\\.|www\\.)?github\\.com\\/(\\w+[^\\/])$"
+//            val regex  = "^(https:\\/\\/|https:\\/\\/www\\.|www\\.)?github\\.com\\/(\\w+[^\\/])$"
+            val regex  = "^(https:\\/\\/|https:\\/\\/www\\.|www\\.)?github\\.com\\/((\\w|-*)+[^\\/])$"
             val pattern: Pattern = Pattern.compile(regex)
             val matcher: Matcher = pattern.matcher(repo)
 
