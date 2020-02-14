@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.profile
 
+import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -172,9 +173,10 @@ class ProfileActivity : AppCompatActivity() {
 //        profile.nickName = Utils.transliteration(profile.firstName + " " + profile.lastName,"_")
         val initials = Utils.toInitials(firstName = profile.firstName, lastName = profile.lastName)
         if(initials !=null && iv_avatar is CircleImageView){
-            iv_avatar.setInitials(initials)
-       //     drawable = TextDrawable(initials,Color.WHITE, resources.getColor(R.color.color_accent, theme))
-       //     iv_avatar.setImageDrawable (drawable)
+            //iv_avatar.setInitials(initials)
+            drawable = TextDrawable(initials,
+                Color.WHITE, resources.getColor(R.color.color_accent, theme))
+            iv_avatar.setImageDrawable (drawable)
 
             //iv_avatar.setBorderColor("#7f05002a")  //2131034154
             //Log.d("M_ProfileActivity","iv_avatar.getBorderColor()=" + iv_avatar.getBorderColor())
