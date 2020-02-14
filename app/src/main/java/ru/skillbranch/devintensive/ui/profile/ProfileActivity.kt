@@ -1,6 +1,5 @@
 package ru.skillbranch.devintensive.ui.profile
 
-import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -18,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.ui.custom.AvatarImageView
 import ru.skillbranch.devintensive.ui.custom.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
@@ -162,6 +162,7 @@ class ProfileActivity : AppCompatActivity() {
         delegate.setLocalNightMode(mode)
     }
 
+
     private fun updateUI(profile: Profile) {
         profile.toMap().also {
             for((k, v) in viewFields){
@@ -170,9 +171,13 @@ class ProfileActivity : AppCompatActivity() {
         }
 //        profile.nickName = Utils.transliteration(profile.firstName + " " + profile.lastName,"_")
         val initials = Utils.toInitials(firstName = profile.firstName, lastName = profile.lastName)
-        if(initials !=null){
-            drawable = TextDrawable(initials,Color.WHITE, resources.getColor(R.color.color_accent, theme))
-            iv_avatar.setImageDrawable (drawable)
+        if(initials !=null && iv_avatar is AvatarImageView){
+            iv_avatar.setInitials(initials)
+       //     drawable = TextDrawable(initials,Color.WHITE, resources.getColor(R.color.color_accent, theme))
+       //     iv_avatar.setImageDrawable (drawable)
+
+            //iv_avatar.setBorderColor("#7f05002a")  //2131034154
+            //Log.d("M_ProfileActivity","iv_avatar.getBorderColor()=" + iv_avatar.getBorderColor())
         }
     }
 

@@ -17,8 +17,7 @@ import androidx.annotation.*
 import ru.skillbranch.devintensive.R
 import kotlin.math.min
 
-
-class CircleImageView @JvmOverloads constructor(
+class AvatarImageView_old @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr:Int = 0
@@ -422,3 +421,4 @@ class CircleImageView @JvmOverloads constructor(
         }
     }
 }
+
