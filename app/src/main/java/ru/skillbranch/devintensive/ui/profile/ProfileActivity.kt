@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
-import ru.skillbranch.devintensive.ui.custom.AvatarImageView
+import ru.skillbranch.devintensive.ui.custom.CircleImageView
 import ru.skillbranch.devintensive.ui.custom.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
@@ -171,7 +171,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 //        profile.nickName = Utils.transliteration(profile.firstName + " " + profile.lastName,"_")
         val initials = Utils.toInitials(firstName = profile.firstName, lastName = profile.lastName)
-        if(initials !=null && iv_avatar is AvatarImageView){
+        if(initials !=null && iv_avatar is CircleImageView){
             iv_avatar.setInitials(initials)
        //     drawable = TextDrawable(initials,Color.WHITE, resources.getColor(R.color.color_accent, theme))
        //     iv_avatar.setImageDrawable (drawable)
