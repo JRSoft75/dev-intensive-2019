@@ -15,6 +15,8 @@ import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.annotation.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.dpToPx
+import ru.skillbranch.devintensive.extensions.pxToDp
 import kotlin.math.min
 
 
@@ -54,7 +56,8 @@ class CircleImageView @JvmOverloads constructor(
     private var mCircleBackgroundPaint = Paint()
 
     private var borderColor = DEFAULT_BORDER_COLOR
-    private var borderWidth = DEFAULT_BORDER_WIDTH
+    @Px
+    var borderWidth: Float = context.dpToPx(DEFAULT_BORDER_WIDTH)
     private var mCircleBackgroundColor = DEFAULT_CIRCLE_BACKGROUND_COLOR
 
     private var mBitmap: Bitmap? = null
@@ -77,7 +80,7 @@ class CircleImageView @JvmOverloads constructor(
         if(attrs!=null){
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
             this.borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-            this.borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
+            this.borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, context.dpToPx(DEFAULT_BORDER_WIDTH))
 
             super.setScaleType(SCALE_TYPE)
             mReady = true
@@ -198,14 +201,14 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     fun getBorderWidth(): Int {
-        return borderWidth
+        return context.pxToDp(borderWidth)
     }
 
     fun setBorderWidth(@Dimension dp: Int) {
-        if (dp == this.borderWidth) {
+        if (context.dpToPx(dp) == this.borderWidth) {
             return
         }
-        this.borderWidth = dp
+        this.borderWidth = context.dpToPx(dp)
         setup()
     }
 
