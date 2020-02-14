@@ -46,8 +46,9 @@
                 android:layout_width="@dimen/avatar_round_size"
                 android:layout_height="@dimen/avatar_round_size"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/man_in_black"
+
                 />
+
 
             <ImageButton
                 android:id="@+id/btn_edit"
