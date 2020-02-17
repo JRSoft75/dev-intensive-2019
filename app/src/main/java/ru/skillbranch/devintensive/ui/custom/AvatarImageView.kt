@@ -21,7 +21,7 @@ import ru.skillbranch.devintensive.extensions.dpToPx
 import kotlin.math.max
 import kotlin.math.truncate
 
-class AvatarImageViewShader @JvmOverloads constructor(
+class AvatarImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
