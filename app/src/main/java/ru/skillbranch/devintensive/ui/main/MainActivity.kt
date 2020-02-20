@@ -16,6 +16,7 @@ import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var chatAdapter: ChatAdapter
@@ -40,8 +41,21 @@ class MainActivity : AppCompatActivity() {
         }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter){
-            viewModel.addToArchive(it.id)
-            Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG).show()
+            val chatId = it.id
+            viewModel.addToArchive(chatId)
+            val snackbar = Snackbar // с текстовой компоновкой "Вы изменили что-то"
+                .make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
+                .setAction("Отменить?") {
+                    viewModel.restoreFromArchive(chatId)
+                    // показываем сообщение "Все вернулось на свои места!"
+                    Snackbar.make(
+                        rv_chat_list,
+                        "Все вернулось на свои места!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            snackbar.show()
+
         }
         val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv_chat_list)
