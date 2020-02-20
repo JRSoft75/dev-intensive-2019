@@ -16,18 +16,32 @@ data class Chat(
     var isArchived: Boolean = false
 ) {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun unreadableMessageCount(): Int {
-        //TODO implement me
-    }
+    fun unreadableMessageCount(): Int  = messages.filter{!it.isReaded}.size
+
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageDate(): Date? {
-        //TODO implement me
+        val lastMessage = messages.lastOrNull()
+        return if(lastMessage != null){
+            lastMessage.date
+        }else{
+            null
+        }
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun lastMessageShort(): Pair<String, String?> = when(val lastMessage = messages.lastOrNull()){
-       //TODO implement me
+    fun lastMessageShort(): Pair<String, String?> {
+        val lastMessage = messages.lastOrNull()
+        return if(lastMessage != null){
+            when(lastMessage){
+                is TextMessage -> lastMessage.text.toString() to "${lastMessage.from.firstName}"
+//                is ImageMessage -> lastMessage.image to "${lastMessage.from.firstName}"
+                is ImageMessage -> "${lastMessage.from.firstName} - отправил фото" to "${lastMessage.from.firstName}"
+                else -> "Неопознанное сообщение от" to "${lastMessage.from.firstName}"
+            }
+        }else{
+          "Нет сообщений от" to "John Doe"
+        }
     }
 
     private fun isSingle(): Boolean = members.size == 1

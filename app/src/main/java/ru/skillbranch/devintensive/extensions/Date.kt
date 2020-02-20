@@ -51,7 +51,7 @@ fun Date.humanizeDiff(date:Date = Date()): String {
     val minutes = (milliseconds / (60 * 1000)).toInt()
     val hours = (milliseconds / (60 * 60 * 1000)).toInt()
     val days = (milliseconds / (24 * 60 * 60 * 1000)).toInt()
-    var result = ""
+    var result: String
     if(isFuture) {
         result = when (seconds) {
                 in 0..1 -> "только что"
