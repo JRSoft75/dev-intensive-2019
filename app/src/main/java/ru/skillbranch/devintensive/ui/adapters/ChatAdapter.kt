@@ -152,7 +152,40 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
         }
     }
 
+    inner class ArchiveViewHolder(convertView: View): ChatItemViewHolder(convertView), ItemTouchViewHolder {
+        override val containerView: View?
+            get() = itemView
+        override fun bind(item: ChatItem, listener: (ChatItem) -> Unit){
+            iv_avatar_group.setInitials(item.title[0].toString())
 
+            with(tv_date_group){
+                visibility = if(item.lastMessageDate !=null) View.VISIBLE else View.GONE
+                text = item.lastMessageDate
+            }
+
+            with(tv_counter_group){
+                visibility = if(item.messageCount >0) View.VISIBLE else View.GONE
+                text = item.messageCount.toString()
+            }
+            tv_title_group.text = item.title
+            tv_message_group.text = item.shortDescription
+            with(tv_message_author){
+                visibility = if(item.messageCount >0) View.VISIBLE else View.GONE
+                text = item.author
+            }
+            itemView.setOnClickListener{
+                listener.invoke(item)
+            }
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemCleared() {
+            itemView.setBackgroundColor(Color.WHITE)
+        }
+    }
     //legasy code
     /*inner class SingleViewHolder(convertView: View): RecyclerView.ViewHolder(convertView) {
         val iv_avatar = convertView.findViewById<AvatarImageView>(R.id.iv_avatar_single)

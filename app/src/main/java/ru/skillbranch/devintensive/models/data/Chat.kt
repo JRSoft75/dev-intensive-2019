@@ -1,7 +1,10 @@
 package ru.skillbranch.devintensive.models.data
 
+import androidx.annotation.VisibleForTesting
 import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
+import ru.skillbranch.devintensive.models.ImageMessage
+import ru.skillbranch.devintensive.models.TextMessage
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -12,37 +15,37 @@ data class Chat(
     var messages: MutableList<BaseMessage> = mutableListOf(),
     var isArchived: Boolean = false
 ) {
-
-    fun unreadableMessageCount(): Int{
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun unreadableMessageCount(): Int {
         //TODO implement me
-        return 0
     }
 
-    private fun lastMessageDate(): Date?{
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun lastMessageDate(): Date? {
         //TODO implement me
-        return Date()
     }
 
-    private fun lastMessageShort(): Pair<String, String>{
-        //TODO implement me
-        return "Сообщений еще нет" to "@John_Doe"
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun lastMessageShort(): Pair<String, String?> = when(val lastMessage = messages.lastOrNull()){
+       //TODO implement me
     }
 
-    private fun isSingle():Boolean =  members.size == 1
+    private fun isSingle(): Boolean = members.size == 1
+
     fun toChatItem(): ChatItem {
-        return if(isSingle()){
+        return if (isSingle()) {
             val user = members.first()
-             ChatItem(
+            ChatItem(
                 id,
                 user.avatar,
-                Utils.toInitials(user.firstName,user.lastName) ?: "??",
-                "${user.firstName?:""} ${user.lastName ?: ""}",
+                Utils.toInitials(user.firstName, user.lastName) ?: "??",
+                "${user.firstName ?: ""} ${user.lastName ?: ""}",
                 lastMessageShort().first,
                 unreadableMessageCount(),
                 lastMessageDate()?.shortFormat(),
                 user.isOnline
             )
-        }else{
+        } else {
             ChatItem(
                 id,
                 null,
@@ -57,8 +60,13 @@ data class Chat(
             )
         }
     }
-
-
 }
+
+enum class ChatType{
+    SINGLE,
+    GROUP,
+    ARCHIVE
+}
+
 
 
