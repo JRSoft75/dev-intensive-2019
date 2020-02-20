@@ -156,8 +156,10 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
         override val containerView: View?
             get() = itemView
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit){
-            iv_avatar_group.setInitials(item.title[0].toString())
 
+            with(iv_avatar_group){
+                setImageDrawable(resources.getDrawable(R.drawable.ic_archive_black_24dp))
+            }
             with(tv_date_group){
                 visibility = if(item.lastMessageDate !=null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate

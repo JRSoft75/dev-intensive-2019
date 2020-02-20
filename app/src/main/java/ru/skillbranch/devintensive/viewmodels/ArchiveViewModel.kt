@@ -7,10 +7,11 @@ import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.repositories.ChatRepository
 
-class MainViewModel: ViewModel() {
+class ArchiveViewModel: ViewModel() {
     private val query =  mutableLiveData("")
     private val chatRepository = ChatRepository
     private val chatItems = mutableLiveData(LoadChats())
+
 
     private fun LoadChats(): List<ChatItem> = chatRepository.loadChats().value!!.map { it.toChatItem() }
 
@@ -30,14 +31,6 @@ class MainViewModel: ViewModel() {
         return result
     }
 
-
-
-
-    fun addToArchive(chatId: String) {
-        val chat = chatRepository.find(chatId)
-        chat ?: return
-        chatRepository.update(chat.copy(isArchived = true))
-    }
 
     fun restoreFromArchive(chatId: String){
         val chat = chatRepository.find(chatId)
