@@ -34,7 +34,7 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
         return when(viewType){
             SINGLE_TYPE -> SingleViewHolder(inflater.inflate(R.layout.item_chat_single, parent, false))
             GROUP_TYPE -> GroupViewHolder(inflater.inflate(R.layout.item_chat_group, parent, false))
-            else -> ArchiveViewHolder(inflater.inflate(R.layout.item_chat_single, parent, false))
+            else -> ArchiveViewHolder(inflater.inflate(R.layout.item_chat_archive, parent, false))
         }
 /*        val convertView = inflater.inflate(R.layout.item_chat_single, parent, false)
         Log.d("M_ChatAdapter","onCreateViewHolder")
@@ -123,17 +123,17 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit){
                 iv_avatar_group.setInitials(item.title[0].toString())
 
-            with(tv_date_group){
+            with(tv_date_archive){
                 visibility = if(item.lastMessageDate !=null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
             }
 
-            with(tv_counter_group){
+            with(tv_counter_archive){
                 visibility = if(item.messageCount >0) View.VISIBLE else View.GONE
                 text = item.messageCount.toString()
             }
             tv_title_group.text = item.title
-            tv_message_group.text = item.shortDescription
+            tv_message_archive.text = item.shortDescription
             with(tv_message_author){
                 visibility = if(item.messageCount >0) View.VISIBLE else View.GONE
                 text = item.author
@@ -160,17 +160,17 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
             with(iv_avatar_group){
                 setImageDrawable(resources.getDrawable(R.drawable.ic_archive_black_24dp))
             }
-            with(tv_date_group){
+            with(tv_date_archive){
                 visibility = if(item.lastMessageDate !=null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
             }
 
-            with(tv_counter_group){
+            with(tv_counter_archive){
                 visibility = if(item.messageCount >0) View.VISIBLE else View.GONE
                 text = item.messageCount.toString()
             }
             tv_title_group.text = item.title
-            tv_message_group.text = item.shortDescription
+            tv_message_archive.text = item.shortDescription
             with(tv_message_author){
                 visibility = if(item.messageCount >0) View.VISIBLE else View.GONE
                 text = item.author

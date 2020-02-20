@@ -386,6 +386,7 @@ object DataGenerator {
                 members
             )
             groupChat.messages = generateRandomMessages(groupChat, members)
+            groupChat.isArchived = Random.nextBoolean()
             list.add(groupChat)
         }
         return list
