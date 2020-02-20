@@ -51,6 +51,7 @@ class GroupViewModel: ViewModel() {
     }
 
     private fun LoadUsers(): List<UserItem> = groupRepository.loadUsers().map{it.toUserItem()}
+
     fun handleCreateGroup() {
         groupRepository.createChat(selectedItems.value!!)
     }
