@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.ui.custom
+package ru.skillbranch.devintensive.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -55,10 +55,12 @@ class CircleImageView @JvmOverloads constructor(
     private var mBorderPaint = Paint()
     private var mCircleBackgroundPaint = Paint()
 
-    private var borderColor = DEFAULT_BORDER_COLOR
+    private var borderColor =
+        DEFAULT_BORDER_COLOR
     @Px
     var borderWidth: Float = context.dpToPx(DEFAULT_BORDER_WIDTH)
-    private var mCircleBackgroundColor = DEFAULT_CIRCLE_BACKGROUND_COLOR
+    private var mCircleBackgroundColor =
+        DEFAULT_CIRCLE_BACKGROUND_COLOR
 
     private var mBitmap: Bitmap? = null
     private var mBitmapShader: BitmapShader? = null
@@ -79,8 +81,12 @@ class CircleImageView @JvmOverloads constructor(
     init{
         if(attrs!=null){
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
-            this.borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-            this.borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, context.dpToPx(DEFAULT_BORDER_WIDTH))
+            this.borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor,
+                DEFAULT_BORDER_COLOR
+            )
+            this.borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, context.dpToPx(
+                DEFAULT_BORDER_WIDTH
+            ))
 
             super.setScaleType(SCALE_TYPE)
             mReady = true
