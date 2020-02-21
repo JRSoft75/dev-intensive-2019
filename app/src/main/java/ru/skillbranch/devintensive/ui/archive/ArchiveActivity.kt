@@ -3,6 +3,8 @@ package ru.skillbranch.devintensive.ui.archive
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -100,7 +102,10 @@ class ArchiveActivity : AppCompatActivity() {
         }
 
 
+
     }
+
+
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)

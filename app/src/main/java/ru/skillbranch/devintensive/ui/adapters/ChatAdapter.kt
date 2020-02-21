@@ -33,13 +33,13 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
         val inflater = LayoutInflater.from(parent.context)
         return when(viewType){
             SINGLE_TYPE -> SingleViewHolder(inflater.inflate(R.layout.item_chat_single, parent, false))
-            GROUP_TYPE -> GroupViewHolder(inflater.inflate(R.layout.item_chat_group, parent, false))
-            else -> ArchiveViewHolder(inflater.inflate(R.layout.item_chat_archive, parent, false))
+//            GROUP_TYPE -> GroupViewHolder(inflater.inflate(R.layout.item_chat_group, parent, false))
+//            else -> ArchiveViewHolder(inflater.inflate(R.layout.item_chat_archive, parent, false))
+            else -> GroupViewHolder(inflater.inflate(R.layout.item_chat_group, parent, false))
         }
-/*        val convertView = inflater.inflate(R.layout.item_chat_single, parent, false)
-        Log.d("M_ChatAdapter","onCreateViewHolder")
-        return SingleViewHolder(convertView)*/
     }
+
+
 
     override fun getItemCount(): Int = items.size
 
@@ -47,6 +47,12 @@ class ChatAdapter(val listener : (ChatItem)->Unit) : RecyclerView.Adapter<ChatAd
         Log.d("M_ChatAdapter","onBindViewHolder $position")
         holder.bind(items[position], listener)
     }
+
+//    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+//        val inflater = LayoutInflater.from(recyclerView.context)
+//        recyclerView.addView(ArchiveViewHolder(inflater.inflate(R.layout.item_chat_archive, parent, false)))
+//        super.onAttachedToRecyclerView(recyclerView)
+//    }
 
     fun updateData(data: List<ChatItem>){
 

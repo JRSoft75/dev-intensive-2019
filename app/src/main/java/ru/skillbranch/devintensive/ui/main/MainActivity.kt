@@ -94,6 +94,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, GroupActivity::class.java)
             startActivity(intent)
         }
+
+//        val inflater = LayoutInflater.from(rv_chat_list.context)
+//        rv_chat_list.layoutManager.addView(item_chat_archive,0)
+//        chatAdapter.addItemAtPosition(0);
+//        chatAdapter.notifyItemInserted(0);
     }
 
     private fun initViewModel() {
